@@ -95,8 +95,17 @@
   loop
   playsinline
 >
-  <source src="https://drive.google.com/uc?export=download&id=1GytiK4YcKmFoZ9W88XukaNa03IrM2M54" type="audio/mpeg">
+  <source src="Music/fondo.mp3" type="audio/mpeg">
 </audio>
+
+<audio
+  id="btn-music"
+  preload="auto"
+  playsinline
+>
+  <source src="Music/boton.mp3" type="audio/mpeg">
+</audio>
+
     
     <!-- Aquí va el script JS con la funcionalidad añadida -->
     <script>
@@ -321,20 +330,21 @@
           btn.textContent = '▶️ Música';
         });
         btn.onclick = () => {
+  const btnMusic = document.getElementById('btn-music');
+  if (!btnMusic) return;
 
-  // 👉 Abrir link de Google Drive
-  window.open(
-    'https://drive.google.com/uc?export=download&id=1GytiK4YcKmFoZ9W88XukaNa03IrM2M54',
-    '_blank'
-  );
-
-  // 👉 Control de música (se mantiene)
-  if (audio.paused) {
-    audio.play();
-    btn.textContent = '🔊 Música';
-  } else {
+  if (!audio.paused) {
+    // Si está sonando la música de fondo → cambiar al botón
     audio.pause();
-    btn.textContent = '⏸ Música';
+    btnMusic.currentTime = 0;
+    btnMusic.volume = 0.9;
+    btnMusic.play();
+    btn.textContent = '💖 Sonando';
+  } else {
+    // Volver a la música de fondo
+    btnMusic.pause();
+    audio.play().catch(()=>{});
+    btn.textContent = '🔊 Música';
   }
 };
       }
