@@ -1,0 +1,8 @@
+name = "streamflix-web"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "public"
+
+# Variables NO secretas (opcional). Los secrets (BACKEND_URL, BACKEND_API_KEY)
+# se configuran aparte con `wrangler pages secret put`, nunca aquí ni en git.
+[vars]
+ENVIRONMENT = "production"
